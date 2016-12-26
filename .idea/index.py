@@ -49,3 +49,13 @@ dict = {'Michael':95,'Bob':75,'Tracy':85}       #dict 就是 object
 dict['Tomes'] = 99
 print('Tomes' in dict)                          #用in判断dict中有没有Tomes
 print(dict.get('Tomes'))                        #用get判断dict中有没有Tomes
+
+s = set([1,2,3])                                #set是一个不存储value的集合 key不能重复
+s.add(3)
+print (s)
+s.remove(3)
+print (s)
+s1 = set([1,2,3])
+s2 = set([2,3,4])
+print (s1 & s2)                                 #可以进行数学上的运算 交集
+print (s1 | s2)                                 #并集
