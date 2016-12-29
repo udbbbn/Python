@@ -85,3 +85,57 @@ def my_abs(x):                                   #用def来定义函数
     else:
         return -x
 print(my_abs(-5))
+def nop():                                       #空函数pass占位符
+    pass
+def my_abs(x):
+    if not isinstance(x,(int,float)):            #类型判断
+        #raise TypeError('bad operand type')      #抛出错误
+        pass
+    if x >= 0:
+        return x
+    else:
+        return -x
+import math
+def move(x,y,step,angle = 0):
+    nx = x + step * math.cos(angle)
+    ny = y - step * math.sin(angle)
+    return nx,ny
+x,y = move(100,100,60,math.pi / 6)              #返回值为tuple 数组 返回值是单一值
+print (x,y)
+r = move(100,100,60,math.pi / 6)
+print (r)
+
+"""可变参数函数"""
+def calc(*number):
+    sum = 0
+    for n in number:
+        sum = sum + n *n ;                       # *号代表可变参数 即不限制参数的个数
+    return sum
+result = calc(12,3,5)
+print (result)
+nums = [1,2,3,4]
+result = calc(*nums)                             # 在传入的参数前加*可以让参数
+print (result)                                   # 以可变参数形式传入
+
+"""关键字参数函数 选填参数"""
+def person(name,age,**kw):
+    print ('name:',name,'age:',age,'other:',kw)     #带两个*号代表关键字参数
+person('Michael',30)                                #关键字参数会组成一个dict
+extra = {'city': 'Beijing', 'job': 'Engineer'}
+person('Jack',24,**extra)
+"""命名关键字参数函数 必填"""
+def person(name, age, *args, city, job):
+    print(name, age, args,city, job)
+person('Jack', 24,3213,321321,city='Beijing', job='Engineer')   #必须要传入参数名 否则报错
+"""
+Python的函数具有非常灵活的参数形态，既可以实现简单的调用，又可以传入非常复杂的参数。
+默认参数一定要用不可变对象，如果是可变对象，程序运行时会有逻辑错误！
+要注意定义可变参数和关键字参数的语法：
+*args是可变参数，args接收的是一个tuple；
+**kw是关键字参数，kw接收的是一个dict。
+以及调用函数时如何传入可变参数和关键字参数的语法：
+可变参数既可以直接传入：func(1, 2, 3)，又可以先组装list或tuple，再通过*args传入：func(*(1, 2, 3))；
+关键字参数既可以直接传入：func(a=1, b=2)，又可以先组装dict，再通过**kw传入：func(**{'a': 1, 'b': 2})。
+使用*args和**kw是Python的习惯写法，当然也可以用其他参数名，但最好使用习惯用法。
+命名的关键字参数是为了限制调用者可以传入的参数名，同时可以提供默认值。
+定义命名的关键字参数在没有可变参数的情况下不要忘了写分隔符*，否则定义的将是位置参数"""
