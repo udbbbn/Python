@@ -56,3 +56,13 @@ print ([d for d in os.listdir('.')])            #listdir可以列出文件和目
 g = (x * x for x in range(10))                  #用（）表示generator类型
 for n in g:                                     #generator保存的是算法 并不是值 但有值的范围
     print (n)
+
+def fib(max):                                   #斐波拉契数列
+    n, a, b = 0, 0, 1
+    while n < max:
+        yield b                                 #如果函数定义中包含yield 则该函数为generator
+        a, b = b, a + b
+        n = n + 1
+    return 'done'
+v = fib(6)
+print (next(v),next(v),next(v),next(v),next(v)  )
