@@ -22,12 +22,13 @@ def module_email(recever = ['669559765@qq.com'], title ='title', mes = ['test', 
     message['Subject'] = title
     #发送方信息
     message['From'] = mail_sender
-    
+
     #登录并群发邮件
     try:
         for i in mail_receivers:
             #接收方信息
             message['To'] = i
+            #获取对象
             smtpObj = smtplib.SMTP()
             #连接到服务器
             smtpObj.connect(mail_host, 25)
@@ -39,10 +40,11 @@ def module_email(recever = ['669559765@qq.com'], title ='title', mes = ['test', 
             )
             #退出
             smtpObj.quit()
-        print('success')
+        return ('success')
     except smtplib.SMTPException as e:
         #打印错误
-        print('error', e)
+        return ('error', e)
 
 if __name__ == '__main__':
-    module_email(['669559765@qq.com'], '验证码', '456153')
+    value = module_email(['669559765@qq.com'], '验证码', ['456153','神奇公司'])
+    print(value)

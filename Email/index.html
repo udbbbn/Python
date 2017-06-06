@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>使用邮箱注册</title>
+    <style>
+        form > div {margin-bottom: 10px;}
+        .marlef {margin-left: 10px;}
+    </style>
     <script>
         function submit() {
                 var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
@@ -12,19 +16,38 @@
                 xmlhttp.send('recever=' + date);
                 xmlhttp.onreadystatechange = function () {
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        document.body.innerHTML = xmlhttp.responseText;
+//                        document.body.innerHTML = xmlhttp.responseText;
+                        if (xmlhttp.responseText != '' && (JSON.parse(xmlhttp.responseText)).status == 200){
+                            alert('成功获取验证码')
+                            handle_data(JSON.parse(xmlhttp.responseText))
+                        }else {
+                            alert('获取验证码错误')
+                        }
+                        
                     }
                 }
+        }
+        
+        function handle_data(value) {
+            document.getElementById('reg').onclick= function () {
+                if (document.getElementById('code').value != value.code){
+                    alert('验证码错误')
+                }else {
+                    alert('注册成功')
+                }
+            }
         }
     </script>
 </head>
 <body>
-
+<article>
+    <h3>使用邮箱注册</h3>
 <form action="cgi-bin/handle.py" method="post" name="user_info">
-    <input type="text" name="recever" value="669559765@qq.com">
-    <input type="text" palceholder="验证码">
-    <input type="submit">test</input>
+    <div><span>邮箱地址：</span><input type="text" name="recever" value="669559765@qq.com"></div>
+    <input type="submit" value="使用POST表单发送请求" style="display: none"/>
 </form>
-    <input type="submit" value="获取验证码" onclick="submit()">
+    <div><span>验证码：</span><input type="text" placeholder="请获取验证码" id="code"><input type="submit" value="获取验证码" onclick="submit()" class="marlef"></div>
+    <input type="button" value="注册" id="reg">
+</article>
 </body>
 </html>
