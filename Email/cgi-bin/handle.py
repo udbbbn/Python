@@ -6,7 +6,7 @@
 import cgi, cgitb
 import random
 
-from module_email import module_email #编辑器未识别 实际可用
+from module_email_txt import module_email #编辑器未识别 实际可用
 cgitb.enable()#使错误信息显示在网页上
 
 
